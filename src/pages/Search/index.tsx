@@ -1,6 +1,18 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import { fetchHeroes } from "../../api";
+import Card from "../../components/Card";
+import { Container } from "./style";
+
+interface Hero {
+  id: number;
+  name: string;
+  description: string;
+  thumbnail: {
+    path: string;
+    extension: string;
+  };
+}
 
 function Search() {
   const [name, setName] = useState("");
@@ -13,11 +25,16 @@ function Search() {
 
   console.log(data);
   return (
-    <div>
-      {data?.data?.results.map((item: { name: string }, index: number) => (
-        <p key={index}>{item?.name}</p>
+    <Container>
+      {data?.data?.results.map((hero: Hero) => (
+        <Card
+          key={hero.id}
+          id={hero.id}
+          name={hero.name}
+          srcImage={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+        />
       ))}
-    </div>
+    </Container>
   );
 }
 
