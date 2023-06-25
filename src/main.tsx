@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Header from "./components/Header";
 import { HeroProvider } from "./context/heroContext";
 import Hero from "./pages/Hero";
 import Home from "./pages/Home";
 import Search from "./pages/Search";
 import { GlobalStyle } from "./style/GlobalStyle";
+
+// Create a client
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -26,9 +30,11 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <GlobalStyle />
-    <Header />
-    <HeroProvider>
-      <RouterProvider router={router} />
-    </HeroProvider>
+    <QueryClientProvider client={queryClient}>
+      <Header />
+      <HeroProvider>
+        <RouterProvider router={router} />
+      </HeroProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
