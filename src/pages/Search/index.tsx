@@ -32,6 +32,7 @@ function Search() {
           id={hero.id}
           name={hero.name}
           srcImage={`${hero.thumbnail.path}.${hero.thumbnail.extension}`}
+          description={hero?.description}
         />
       ))}
     </Container>
