@@ -1,11 +1,13 @@
+import { ChangeEvent } from "react";
+
 interface InputProps {
   value: string | number;
-  handleOnChange: (event: any) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   type: string;
 }
 
-function Input({ value, handleOnChange, type = "text" }: InputProps) {
-  return <input value={value} onChange={handleOnChange} type={type} />;
+function Input({ value, onChange, type = "text" }: InputProps) {
+  return <input value={value} onChange={onChange} type={type} />;
 }
 
 export default Input;

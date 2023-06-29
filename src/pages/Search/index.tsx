@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useQuery } from "react-query";
 import { fetchHeroes } from "../../api";
 import Card from "../../components/Card";
@@ -16,7 +16,7 @@ interface Hero {
 }
 
 function Search() {
-  const [name, setName] = useState("");
+  const [name, setName] = useState<string>("");
   const { data, error, isLoading } = useQuery("heroes", () =>
     fetchHeroes(name)
   );
@@ -24,8 +24,8 @@ function Search() {
   if (error) return "An error has occurred.";
   if (isLoading) return "Loading...";
 
-  function handleOnChange(e) {
-    setName(e.target.value);
+  function handleOnChange(event: ChangeEvent<HTMLInputElement>) {
+    setName(event.target.value);
   }
 
   console.log(data);
